@@ -1,0 +1,5 @@
+#!/bin/bash
+export TFLINT_VERSION="0.56.0"
+export TERRAFORM_VERSION="1.9.5"
+export CHECKOV_VERSION="3.2.340"
+export TERRAFORM_DOCS_VERSION="0.19.0"
