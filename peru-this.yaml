@@ -7,13 +7,12 @@ imports:
   common-tools|src|idea-codestyles: .idea/codeStyles/
   common-tools|src|editorconfig: ./
   common-tools|src|yamllint: ./
-  #  common-tools|github: .github/
 
 git module common-tools:
   url: git@github.com-leinad-sch:leinad-sch/common-tools.git
-  reup: initial-version
+  reup: main
   recursive: false
-  rev: 96bf588fbe4436d08c5dcb266c51ce3833d1485c
+  rev: 12debf37ffc77305d80e0572277a85df6587a3ee
 
 rule src:
   export: src/
@@ -38,9 +37,6 @@ rule editorconfig:
 
 rule yamllint:
   pick: .yamllint
-
-#rule gitlab-ci:
-#  pick: .gitlab-ci.yml
 
 git module rotate-deploy-keys:
   url: https://github.com/sbellone/release-workflow-example.git
