@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Configuration constants
 readonly DEFAULT_TERRAFORM_DOCS_VERSION="0.19.0"
 if [[ -z $PARALLEL_JOBS ]]; then
@@ -11,6 +12,14 @@ if [[ -z $OUTPUT_FILE ]]; then
   readonly OUTPUT_FILE="README.md"
   export OUTPUT_FILE
 fi
+
+# Directory setup
+GIT_ROOT_DIRECTORY="$(git rev-parse --show-toplevel)"
+readonly GIT_ROOT_DIRECTORY
+export GIT_ROOT_DIRECTORY
+SCRIPT_DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly SCRIPT_DIRECTORY
+export SCRIPT_DIRECTORY
 
 # shellcheck source=/dev/null
 if [[ ! -f "$SCRIPT_DIRECTORY/utils.sh" ]]; then
@@ -29,13 +38,6 @@ if [[ -z $TERRAFORM_DOCS_VERSION ]]; then
   readonly TERRAFORM_DOCS_VERSION="$DEFAULT_TERRAFORM_DOCS_VERSION"
 fi
 
-# Directory setup
-GIT_ROOT_DIR="$(git rev-parse --show-toplevel)"
-readonly GIT_ROOT_DIR
-export GIT_ROOT_DIR
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-readonly SCRIPT_DIR
-
 # Generate documentation for a single directory
 generate_docs_for_directory() {
   echo "Generating documentation for directory: $1"
@@ -48,7 +50,7 @@ generate_docs_for_directory() {
       "${target_dir}"
   else
     docker run --rm \
-      -v "${GIT_ROOT_DIR}:/terraform-docs" \
+      -v "${GIT_ROOT_DIRECTORY}:/terraform-docs" \
       -w /terraform-docs \
       "${DOCKER_IMAGE}:${TERRAFORM_DOCS_VERSION}" \
       markdown table \
@@ -62,7 +64,7 @@ generate_docs_for_directory() {
 process_directories() {
   echo "Processing directories in parallel..."
   local terraform_dirs
-  terraform_dirs="$("$SCRIPT_DIR/list_terraform_directories.sh" 2>/dev/null)"
+  terraform_dirs="$("$SCRIPT_DIRECTORY/list_terraform_directories.sh" 2>/dev/null)"
 
   # Determine xargs replacement size parameter
   local xargs_opts
