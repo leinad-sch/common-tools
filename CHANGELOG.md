@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.3](https://github.com/leinad-sch/common-tools/compare/v0.0.2...v0.0.3) (2025-04-18)
+
+
+### Features
+
+* **src/github/workflows:** add concurrency control to PR common workflow ([41278f8](https://github.com/leinad-sch/common-tools/commit/41278f8d1606298eb764bad73fac5be320ec4251))
+* **src/github/workflows:** add concurrency controls and auto-update scripts to workflows ([408f67e](https://github.com/leinad-sch/common-tools/commit/408f67ed25a70aab68d37bb36439acb5bdafaf47))
+
 ## [0.0.2](https://github.com/leinad-sch/common-tools/compare/v0.0.1...v0.0.2) (2025-04-15)
 
 
